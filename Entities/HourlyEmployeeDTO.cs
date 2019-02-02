@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Entities
 {
+    /// <summary>
+    /// Representación empleado con salario por horas
+    /// </summary>
     [DataContract]
     public class HourlyEmployeeDTO : IEmployeeDTO
     {

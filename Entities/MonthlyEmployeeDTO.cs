@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Entities
 {
+    /// <summary>
+    ///  Representación empleado con salario mensual
+    /// </summary>
     [DataContract]
     public class MonthlyEmployeeDTO: IEmployeeDTO
     {

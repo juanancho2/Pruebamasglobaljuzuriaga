@@ -4,10 +4,13 @@ using System.Runtime.Serialization;
 using System.Text;
 
 namespace Entities
-{
+{   
+
+    /// <summary>
+    /// Interface de empleados
+    /// </summary>
     public interface IEmployeeDTO
     {
-
         int Id { get; set; }
         string Name { get; set; }
         string ContractTypeName { get; set; }

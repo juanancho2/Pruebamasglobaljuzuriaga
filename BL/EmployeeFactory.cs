@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using BL.Exceptions;
+using Entities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -21,12 +22,26 @@ namespace BL
             JObject jo = JObject.Load(reader);
             var props = jo.Properties().ToList();
 
-            if (props.Any(pi => string.Equals(pi.Name, "contractTypeName", StringComparison.OrdinalIgnoreCase)))
+            try
             {
-                var contractType = props[2].Value;
-                if (contractType.ToString().Equals("HourlySalaryEmployee"))
+                if (props.Any(pi => string.Equals(pi.Name, "contractTypeName", StringComparison.OrdinalIgnoreCase)))
                 {
-                    return new HourlyEmployeeDTO()
+                    var contractType = props[2].Value;
+                    if (contractType.ToString().Equals("HourlySalaryEmployee"))
+                    {
+                        return new HourlyEmployeeDTO()
+                        {
+                            Id = Convert.ToInt32(props[0].Value),
+                            Name = props[1].Value.ToString(),
+                            ContractTypeName = props[2].Value.ToString(),
+                            RoleId = Convert.ToInt32(props[3].Value),
+                            RoleName = props[4].Value.ToString(),
+                            RoleDescription = props[5].Value.ToString(),
+                            HourlySalary = Convert.ToInt32(props[6].Value),
+                            MonthtlySalary = Convert.ToInt32(props[7].Value)
+                        };
+                    }
+                    return new MonthlyEmployeeDTO()
                     {
                         Id = Convert.ToInt32(props[0].Value),
                         Name = props[1].Value.ToString(),
@@ -38,19 +53,12 @@ namespace BL
                         MonthtlySalary = Convert.ToInt32(props[7].Value)
                     };
                 }
-                return new MonthlyEmployeeDTO()
-                {
-                    Id = Convert.ToInt32(props[0].Value),
-                    Name = props[1].Value.ToString(),
-                    ContractTypeName = props[2].Value.ToString(),
-                    RoleId = Convert.ToInt32(props[3].Value),
-                    RoleName = props[4].Value.ToString(),
-                    RoleDescription = props[5].Value.ToString(),
-                    HourlySalary = Convert.ToInt32(props[6].Value),
-                    MonthtlySalary = Convert.ToInt32(props[7].Value)
-                };
+
             }
-            
+            catch (Exception)
+            {
+                throw new ParsingFailedException("Error en el proceso de parseo.");
+            }
 
             return null;
         }

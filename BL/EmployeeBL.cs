@@ -27,5 +27,14 @@ namespace BL
             return employees.ToList();
         }
 
+        public async Task<IEmployeeDTO> GetEmployeeAsync(int id)
+        {
+            var employees = await this.client.Get<List<IEmployeeDTO>>("api/Employees", (stringContent) =>
+            {
+                return JsonConvert.DeserializeObject<List<IEmployeeDTO>>(stringContent, new EmployeeFactory());
+            });
+            return employees.FirstOrDefault(e => e.Id == id);
+        }
+
     }
 }
