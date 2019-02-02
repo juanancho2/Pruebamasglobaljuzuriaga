@@ -49,7 +49,7 @@ namespace AppEmpleados.Controllers
                 // Se controla en caso de que se modifique la api: http://masglobaltestapi.azurewebsites.net/api/Employees
                 return InternalServerError(e);
             }
-            catch (Exception er)
+            catch (Exception )
             {
                 // En caso de otra excepción, se retorna un error 500. Sin embargo no se dan detalles de la excepción.
                 return InternalServerError();

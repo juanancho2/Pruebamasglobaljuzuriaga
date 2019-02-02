@@ -15,7 +15,7 @@ namespace BL
         public EmployeeBL()
         {
             this.client = new RestClient();
-            this.client.init("http://masglobaltestapi.azurewebsites.net");
+            this.client.Init("http://masglobaltestapi.azurewebsites.net");
         }
 
         public async Task<List<IEmployeeDTO>> GetEmployeesAsync()

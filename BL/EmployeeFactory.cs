@@ -62,11 +62,13 @@ namespace BL
 
             return null;
         }
-
-        // Se deja sin implementar, debido a que no se necesitan hacer peticiones POST o PUT
+                
+        /// <summary>
+        /// Se deja sin implementar, debido a que no se necesitan hacer peticiones POST o PUT
+        /// </summary>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+          //  throw new NotImplementedException();
         }
     }
 }
